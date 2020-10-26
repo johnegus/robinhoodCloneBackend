@@ -5,9 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     stockName: DataTypes.STRING,
     currentPrice: DataTypes.INTEGER,
     buyPrice: DataTypes.INTEGER,
-    shares: DataTypes.INTEGER, validate: {
-      min: 1
-    },
+    shares: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {});
   Position.associate = function(models) {

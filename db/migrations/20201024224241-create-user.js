@@ -10,11 +10,13 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(255),
+        unique: true,
       },
       email: {
         allowNull: false,
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(255),
+        unique: true,
       },
       cashValue: {
         allowNull: false,
