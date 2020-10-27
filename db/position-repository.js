@@ -9,7 +9,7 @@ async function create(details, user) {
   
   async function list() {
     return await Position.findAll({
-      attributes: ["stockSymbol", "stockName", "currentPrice", "id"],
+      attributes: ["stockSymbol", "stockName", "currentPrice", "id", "buyPrice", "shares"],
     });
   }
   
@@ -25,7 +25,7 @@ async function create(details, user) {
         id: position.id,
         buyPrice: position.buyPrice,
         shares: position.shares,
-      user: {
+      userId: {
         id: position.user.id,
         name: position.user.name,
       },

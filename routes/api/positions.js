@@ -20,14 +20,46 @@ router.get(
   })
 );
 
-// router.get('/', asyncHandler(async (req, res) => {
-//   const positions = await Position.findAll({
-//     order: [['createdAt', 'ASC']],
-//     attributes: ['id', 'stockSymbol', 'stockName', 'currentPrice',
-//     'buyPrice', 'shares'],
-//   });
-//   res.json({ positions });
-// }));
+// router.post(
+//   "/",
+ 
+//   asyncHandler(async function (req, res, next) {
+   
+
+//     const id = await PositionRepository.create(req.body, req.user);
+//     return res.redirect(`${req.baseUrl}/${id}`);
+//   })
+// );
+
+router.post('/', authenticated, asyncHandler ( async (req, res) => {
+  const { 
+    stockSymbol,
+    stockName,
+    currentPrice,
+    buyPrice,
+    shares,
+    userId
+  } = req.body;
+  const position = await Position.create({
+    stockSymbol,
+    stockName,
+    currentPrice,
+    buyPrice,
+    shares,
+    userId
+  });
+  res.json({ position });
+}
+));
+
+router.get(
+  "/:id",
+  authenticated,
+  asyncHandler(async function (req, res) {
+    const positions = await PositionRepository.one(req.params.id);
+    res.json(positions);
+  })
+);
 
 
 
