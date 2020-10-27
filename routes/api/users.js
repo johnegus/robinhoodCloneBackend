@@ -16,7 +16,7 @@ const email =
 const name =
   check('name')
     .not().isEmpty()
-    .withMessage('Please provide a player name');
+    .withMessage('Please provide a user name');
 
 const password =
   check('password')
@@ -31,8 +31,8 @@ router.post('/', email, password, name, asyncHandler(async function (req, res, n
 
   const user = await UserRepository.create(req.body);
 
-  const { jti, token } = generateToken(player);
-  player.tokenId = jti;
+  const { jti, token } = generateToken(user);
+  user.tokenId = jti;
   await user.save();
   res.json({ token, user: user.toSafeObject() });
 }));

@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {});
   Watchlist.associate = function(models) {
-    // associations can be defined here
+    Watchlist.belongsTo(models.User, { foreignKey: 'userId'});
   };
   return Watchlist;
 };

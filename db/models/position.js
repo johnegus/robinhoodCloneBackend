@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {});
   Position.associate = function(models) {
-    // associations can be defined here
+    Position.belongsTo(models.User, { foreignKey: 'userId'});
   };
   return Position;
 };
