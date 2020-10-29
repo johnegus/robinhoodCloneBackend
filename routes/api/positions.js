@@ -1,6 +1,6 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const { check, validationResult } = require('express-validator');
+const { check } = require('express-validator');
 
 const { authenticated } = require('./security-utils');
 
@@ -20,25 +20,27 @@ router.get(
   })
 );
 
-// router.post(
-//   "/",
- 
-//   asyncHandler(async function (req, res, next) {
-   
 
-//     const id = await PositionRepository.create(req.body, req.user);
-//     return res.redirect(`${req.baseUrl}/${id}`);
-//   })
-// );
 
-router.post('/', authenticated, asyncHandler ( async (req, res) => {
+const buyPrice = check('buyPrice')
+  .not().isEmpty()
+  .withMessage('Prices must not be null')
+
+const shares = check('shares')
+  .not().isEmpty()
+  .withMessage('How many shares?')
+  .isInt()
+  .withMessage('How many shares?')
+
+  const validationResult = [buyPrice, shares]
+
+router.post('/', authenticated, validationResult, asyncHandler ( async (req, res) => {
   const { 
     stockSymbol,
     stockName,
     currentPrice,
     buyPrice,
-    shares,
-    userId
+    shares
   } = req.body;
   const position = await Position.create({
     stockSymbol,
@@ -46,7 +48,7 @@ router.post('/', authenticated, asyncHandler ( async (req, res) => {
     currentPrice,
     buyPrice,
     shares,
-    userId
+    userId: req.user.id
   });
   res.json({ position });
 }
@@ -56,11 +58,33 @@ router.get(
   "/:id",
   authenticated,
   asyncHandler(async function (req, res) {
-    const positions = await PositionRepository.one(req.params.id);
-    res.json(positions);
+    const position = await Position.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.json(position);
   })
 );
 
+
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const position = await Position.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+   
+    if (position) {
+      await position.destroy();
+      res.json({ message: `Deleted  stock with id of ${req.params.id}.` });
+    } else {
+      console.error(' stock not found')
+    }
+  })
+);
 
 
 module.exports = router;

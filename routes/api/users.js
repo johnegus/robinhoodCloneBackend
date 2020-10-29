@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 
 const UserRepository = require('../../db/user-repository');
 const { authenticated, generateToken } = require('./security-utils');
+const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
@@ -29,7 +30,21 @@ router.post('/', email, password, name, asyncHandler(async function (req, res, n
     return next({ status: 422, errors: errors.array() });
   }
 
-  const user = await UserRepository.create(req.body);
+  // const { name, email, password, cashValue } = req.body;
+  //     const hashedPassword = await bcrypt.hash(password, 10);
+  //     const user = await User.create({ name, email, cashValue, hashedPassword, tokenId });
+
+
+  const reqUser = {
+    name: req.body.name,
+    fullName: req.body.fullName,
+    email: req.body.email,
+    cashValue: req.body.cashValue,
+    password: req.body.password,
+    tokenId: ''
+  }
+
+  const user = await UserRepository.create(reqUser);
 
   const { jti, token } = generateToken(user);
   user.tokenId = jti;
@@ -43,5 +58,15 @@ router.get('/me', authenticated, function(req, res) {
     name: req.user.name,
   });
 });
+
+// router.patch('/', asyncHandler(async function (req, res, next) {
+ 
+//   const user = await UserRepository.create(req.body);
+
+//   const { jti, token } = generateToken(user);
+//   user.tokenId = jti;
+//   await user.save();
+//   res.json({ token, user: user.toSafeObject() });
+// }));
 
 module.exports = router;
