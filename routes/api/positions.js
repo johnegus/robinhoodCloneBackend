@@ -11,14 +11,28 @@ const db = require('../../db/models');
 const { Position } = db;
 const PositionRepository = require('../../db/position-repository');
 
+// router.get(
+//   "/",
+//   authenticated,
+//   asyncHandler(async function (req, res) {
+//     const positions = await PositionRepository.list({
+//             where: {userId: req.user.id},
+//           });
+//     res.json(positions);
+//   })
+// );
+
 router.get(
   "/",
   authenticated,
-  asyncHandler(async function (_req, res) {
-    const positions = await PositionRepository.list();
+  asyncHandler(async function (req, res) {
+    const positions = await Position.findAll({
+      where: {userId: req.user.id},
+    });
     res.json(positions);
   })
 );
+
 
 
 
