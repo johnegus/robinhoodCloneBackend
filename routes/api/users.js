@@ -5,6 +5,9 @@ const { check, validationResult } = require('express-validator');
 const UserRepository = require('../../db/user-repository');
 const { authenticated, generateToken } = require('./security-utils');
 const bcrypt = require("bcryptjs");
+const db = require('../../db/models');
+
+const { Position, User} = db;
 
 const router = express.Router();
 
@@ -58,6 +61,24 @@ router.get('/me', authenticated, function(req, res) {
     name: req.user.name,
   });
 });
+
+router.get(
+  "/:id",
+  authenticated,
+  asyncHandler(async (req, res, next) => {
+    const user = await User.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    const positions = await Position.findAll({
+      where: {
+        userId: req.params.id,
+      },
+    });
+    res.json({ positions, user });
+  })
+);
 
 // router.patch('/', asyncHandler(async function (req, res, next) {
  
