@@ -8,13 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      cashInstance: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+      deposit: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
-      investmentsInstance: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+      profitLoss: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       userId: {
         allowNull: false,

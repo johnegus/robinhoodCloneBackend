@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const History = sequelize.define('History', {
-    cashInstance: DataTypes.INTEGER,
-    investmentsInstance: DataTypes.INTEGER,
+    deposit: DataTypes.INTEGER,
+    profitLoss: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {});
   History.associate = function(models) {

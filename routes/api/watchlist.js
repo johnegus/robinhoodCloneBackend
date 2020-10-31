@@ -16,10 +16,18 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const watchedStocks = await Watchlist.findAll({
       where: {
-        userId: req.params.id,
+        userId: req.user.id,
       },
     });
-    res.json({ watchedStocks });
+    if(watchedStocks) {
+      res.json(watchedStocks)
+    } else {
+      const err = Error('No Watchlist found.');
+      err.errors = [`Watchlist were not found`];
+      err.title = `No Watchlist`;
+      err.status = 404;
+      next(err);
+    }
   })
 );
 
