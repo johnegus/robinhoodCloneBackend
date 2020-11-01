@@ -47,7 +47,7 @@ const shares = check('shares')
 
   const validationResult = [buyPrice, shares]
 
-router.post('/', authenticated, validationResult, asyncHandler ( async (req, res) => {
+router.post('/', authenticated, asyncHandler ( async (req, res) => {
   const { 
     stockSymbol,
     stockName,
