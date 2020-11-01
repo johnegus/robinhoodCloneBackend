@@ -12,7 +12,7 @@ const { Watchlist } = db;
 router.get(
   "/",
   authenticated,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async  (req, res) => {
     const watchedStocks = await Watchlist.findAll({
       where: {
         userId: req.user.id,
@@ -20,13 +20,7 @@ router.get(
     });
     if(watchedStocks) {
       res.json(watchedStocks)
-    } else {
-      const err = Error('No Watchlist found.');
-      err.errors = [`Watchlist were not found`];
-      err.title = `No Watchlist`;
-      err.status = 404;
-      next(err);
-    }
+    } 
   })
 );
 
@@ -35,7 +29,7 @@ router.post(
     authenticated,
     asyncHandler(async (req, res) => {
       const { watchedStock } = req.body;
-      const stock = await Watchlist.create({ symbol, userId: req.user.id });
+      const watchedStock = await Watchlist.create({ symbol, userId: req.user.id });
       res.json({ watchedStock });
     })
   );
