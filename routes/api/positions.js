@@ -9,7 +9,6 @@ const router = express.Router();
 const db = require('../../db/models');
 
 const { Position } = db;
-const PositionRepository = require('../../db/position-repository');
 
 // router.get(
 //   "/",
