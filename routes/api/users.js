@@ -7,7 +7,7 @@ const { authenticated, generateToken } = require('./security-utils');
 const bcrypt = require("bcryptjs");
 const db = require('../../db/models');
 
-const { Position, User} = db;
+const { Position, User, Watchlist} = db;
 
 const router = express.Router();
 
@@ -76,7 +76,12 @@ router.get(
         userId: req.params.id,
       },
     });
-    res.json({ positions, user });
+    const watchlists = await Watchlist.findAll({
+      where: {
+        userId: req.params.id,
+      },
+    });
+    res.json({ positions, user, watchlists });
   })
 );
 

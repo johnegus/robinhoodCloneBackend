@@ -5,22 +5,27 @@ const { authenticated } = require('./security-utils');
 
 const router = express.Router();
 
-const db = require('../../db/models');
 
-const { Watchlist } = db;
+const db = require('../../db/models');
+const {Watchlist} = db;
+
+ 
+
+// router.get("/", authenticated, asyncHandler(async (req, res) =>{
+//     const {load} = await Watchlist.findAll()
+//        res.JSON({load})
+    
+//   })
+// );
 
 router.get(
   "/",
   authenticated,
-  asyncHandler(async  (req, res) => {
+  asyncHandler(async (req, res) => {
     const watchedStocks = await Watchlist.findAll({
-      where: {
-        userId: req.user.id,
-      },
+      where: {userId: req.user.id},
     });
-    if(watchedStocks) {
-      res.json(watchedStocks)
-    } 
+    res.json( watchedStocks );
   })
 );
 
@@ -28,8 +33,8 @@ router.post(
     "/",
     authenticated,
     asyncHandler(async (req, res) => {
-      const { watchedStock } = req.body;
-      const watchedStock = await Watchlist.create({ symbol, userId: req.user.id });
+      const { stockSymbol, stockName, currentPrice } = req.body;
+      const watchedStock = await Watchlist.create({ stockSymbol, stockName, currentPrice, userId: req.user.id });
       res.json({ watchedStock });
     })
   );
