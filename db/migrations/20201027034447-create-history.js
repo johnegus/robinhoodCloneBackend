@@ -12,9 +12,25 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
-      profitLoss: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+      stockSymbol: {
+        defaultValue: '---',
+        type: Sequelize.STRING
+      },
+      stockName: {
+        defaultValue: '---',
+        type: Sequelize.STRING
+      },
+      currentPrice: {
+        defaultValue: 0,
+        type: Sequelize.INTEGER
+      },
+      buyPrice: {
+        defaultValue: 0,
+        type: Sequelize.INTEGER
+      },
+      shares: {
+        defaultValue: 0,
+        type: Sequelize.INTEGER
       },
       userId: {
         allowNull: false,
