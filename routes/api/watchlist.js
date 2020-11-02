@@ -53,27 +53,21 @@ router.get(
 );
 
 router.delete(
-    "/:id",
-    asyncHandler(async (req, res, next) => {
-      const watchedStock = await Watchlist.findOne({
-        where: {
-          id: req.params.id,
-        },
-      });
-      if (req.user.id !== watchedStock.userId) {
-        const err = new Error("Unauthorized");
-        err.status = 401;
-        err.message = "You are not authorized to delete this stock.";
-        err.title = "Unauthorized";
-        throw err;
-      }
-      if (watchedStock) {
-        await watchedStock.destroy();
-        res.json({ message: `Deleted watchlist stock with id of ${req.params.id}.` });
-      } else {
-        console.error('watchlist stock not found')
-      }
-    })
-  );
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const watchedStock = await Watchlist.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+   
+    if (watchedStock) {
+      await watchedStock.destroy();
+      res.json({ message: `Deleted  stock with id of ${req.params.id}.` });
+    } else {
+      console.error(' stock not found')
+    }
+  })
+);
 
 module.exports = router;

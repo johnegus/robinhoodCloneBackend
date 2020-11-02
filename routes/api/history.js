@@ -13,13 +13,13 @@ const { History } = db;
 router.get(
   "/",
   authenticated,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     const history = await History.findAll({
       where: {
-        userId: req.params.id,
+        userId: req.user.id,
       },
     });
-    res.json({ history });
+    res.json( history );
   })
 );
 
