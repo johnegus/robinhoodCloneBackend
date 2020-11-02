@@ -27,8 +27,8 @@ router.post(
     "/",
     authenticated,
     asyncHandler(async (req, res) => {
-      const { deposit, stockSymbol, stockName, buyPrice, currentPrice, shares} = req.body;
-      const transaction = await History.create({ deposit, stockSymbol, stockName, buyPrice, currentPrice, shares, userId: req.user.id });
+      const { deposit, stockSymbol, stockName, boughtPrice, soldPrice, shares} = req.body;
+      const transaction = await History.create({ deposit, stockSymbol, stockName, boughtPrice, soldPrice, shares, userId: req.user.id });
       res.json({ transaction });
     })
   );

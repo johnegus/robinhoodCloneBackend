@@ -20,11 +20,11 @@ module.exports = {
         defaultValue: '---',
         type: Sequelize.STRING
       },
-      currentPrice: {
+      boughtPrice: {
         defaultValue: 0,
         type: Sequelize.INTEGER
       },
-      buyPrice: {
+      soldPrice: {
         defaultValue: 0,
         type: Sequelize.INTEGER
       },

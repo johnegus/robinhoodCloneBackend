@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     deposit: DataTypes.INTEGER,
     stockSymbol: DataTypes.STRING,
     stockName: DataTypes.STRING,
-    buyPrice: DataTypes.INTEGER,
-    currentPrice: DataTypes.INTEGER,
+    boughtPrice: DataTypes.INTEGER,
+    soldPrice: DataTypes.INTEGER,
     shares: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {});
