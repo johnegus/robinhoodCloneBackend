@@ -1,11 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const History = sequelize.define('History', {
-    deposit: DataTypes.INTEGER,
+    deposit: DataTypes.NUMERIC,
     stockSymbol: DataTypes.STRING,
     stockName: DataTypes.STRING,
-    boughtPrice: DataTypes.INTEGER,
-    soldPrice: DataTypes.INTEGER,
+    boughtPrice: DataTypes.NUMERIC,
+    soldPrice: DataTypes.NUMERIC,
     shares: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {});

@@ -17,11 +17,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       currentPrice: {
-        type: Sequelize.INTEGER
+        type: Sequelize.NUMERIC(10, 2)
       },
       buyPrice: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.NUMERIC(10, 2)
       },
       shares: {
         allowNull: false,

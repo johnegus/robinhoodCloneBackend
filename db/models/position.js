@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Position = sequelize.define('Position', {
     stockSymbol: DataTypes.STRING,
     stockName: DataTypes.STRING,
-    currentPrice: DataTypes.INTEGER,
-    buyPrice: DataTypes.INTEGER,
+    currentPrice: DataTypes.NUMERIC,
+    buyPrice: DataTypes.NUMERIC,
     shares: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {});

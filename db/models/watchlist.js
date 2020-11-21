@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Watchlist = sequelize.define('Watchlist', {
     stockSymbol: DataTypes.STRING,
     stockName: DataTypes.STRING,
-    currentPrice: DataTypes.INTEGER,
+    currentPrice: DataTypes.NUMERIC,
     userId: DataTypes.INTEGER
   }, {});
   Watchlist.associate = function(models) {

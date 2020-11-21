@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       currentPrice: {
-        type: Sequelize.INTEGER
+        type: Sequelize.NUMERIC(10, 2)
       },
       userId: {
         allowNull: false,

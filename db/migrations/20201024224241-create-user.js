@@ -20,10 +20,10 @@ module.exports = {
       },
       cashValue: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.NUMERIC(10, 2)
       },
       investmentsValue: {
-        type: Sequelize.INTEGER
+        type: Sequelize.NUMERIC(10, 2)
       },
       hashedPassword: {
         allowNull: false,

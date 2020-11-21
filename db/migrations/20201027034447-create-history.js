@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       deposit: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.NUMERIC(10, 2),
         defaultValue: 0
       },
       stockSymbol: {
@@ -22,11 +22,11 @@ module.exports = {
       },
       boughtPrice: {
         defaultValue: 0,
-        type: Sequelize.INTEGER
+        type: Sequelize.NUMERIC(10, 2)
       },
       soldPrice: {
         defaultValue: 0,
-        type: Sequelize.INTEGER
+        type: Sequelize.NUMERIC(10, 2)
       },
       shares: {
         defaultValue: 0,
