@@ -99,5 +99,14 @@ router.delete(
   })
 );
 
+router.post('/update', authenticated, asyncHandler ( async (req, res) => {
+  const {
+    stockSymbol,currentPrice
+  } = req.body
+  const position = await Position.update({ currentPrice }, {
+    where: {stockSymbol, userId: req.user.id}
+  });
+    res.json({ position });
+}))
 
 module.exports = router;
