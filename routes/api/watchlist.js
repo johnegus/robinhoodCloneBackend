@@ -70,4 +70,14 @@ router.delete(
   })
 );
 
+router.post('/update', authenticated, asyncHandler ( async (req, res) => {
+  const {
+    stockSymbol,currentPrice
+  } = req.body
+  const watchedStock = await Watchlist.update({ currentPrice }, {
+    where: {stockSymbol, userId: req.user.id}
+  });
+    res.json({ watchedStock });
+}))
+
 module.exports = router;
